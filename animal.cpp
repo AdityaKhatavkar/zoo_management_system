@@ -13,69 +13,84 @@ animal::animal(
     int age
 )
 {
-    animal_id = id;
-    animal_name = name;
-    animal_age = age;
+    m_animalID = id;
+    m_animalName = name;
+    m_animalAge = age;
 
-    is_herbivorous = is_veg;
-    eating_frequency = freq;
-    meal_size_kg = food_kg;
+    m_isHerbivorous = is_veg;
+    m_eatingFrequency = freq;
+    m_mealSizeKg = food_kg;
 
-    animal_is_alive = true;
-    animal_removed = false;
+    m_animalIsAlived = true;
+    m_animalRemoved = false;
 
-    assigned = false;
+    m_assigned = false;
 }
 
-bool animal::is_veg()
+bool animal::IsVeg()
 {
-    return is_herbivorous;
+    return m_isHerbivorous;
 }
 
-int animal::daily_food_requirement()
+int animal::DailyFoodRequirement()
 {
-    return eating_frequency * meal_size_kg;
+    return m_eatingFrequency * m_mealSizeKg;
 }
 
-void animal::update_animal_info(
+void animal::UpdateAnimalInfo(
     bool is_living,
     bool to_remove,
     int age
 )
 {
-    animal_is_alive = is_living;
-    animal_removed = to_remove;
-    animal_age = age;
+    m_animalIsAlived = is_living;
+    m_animalRemoved = to_remove;
+    m_animalAge = age;
 }
 
-void animal::display_animal_info()
+void animal::DisplayAnimalInfo()
 {
     cout << "Animal ID : "
-         << animal_id << endl;
+         << m_animalID << endl;
 
     cout << "Animal Name : "
-         << animal_name << endl;
+         << m_animalName << endl;
 
     cout << "Animal Age : "
-         << animal_age << endl;
+         << m_animalAge << endl;
 }
 
-int animal::get_id()
+int animal::GetId()
 {
-    return animal_id;
+    return m_animalID;   // FIX: was returning m_animalAge
 }
 
-string animal::get_name()
+string animal::GetName()
 {
-    return animal_name;
+    return m_animalName;
 }
 
-void animal::set_assigned(bool value)
+int animal::GetAge()
 {
-    assigned = value;
+    return m_animalAge;
 }
 
-bool animal::is_assigned() const
+int animal::GetFrequency()
 {
-    return assigned;
-}   
+    return m_eatingFrequency;
+}
+
+int animal::GetMealSize()
+{
+    return m_mealSizeKg;
+}
+
+void animal::SetAssigned(bool value)
+{
+    m_assigned = value;
+}
+
+bool animal::IsAssigned() const
+{
+    return m_assigned;
+}

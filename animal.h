@@ -7,47 +7,54 @@ class animal{
 
 private:
 
-    int animal_id;
-    bool is_herbivorous;
-    int eating_frequency;
-    int meal_size_kg;
+    int m_animalID;
+    bool m_isHerbivorous;
+    int m_eatingFrequency;
+    float m_mealSizeKg;
 
-    std::string animal_name;
-    int animal_age;
+    std::string m_animalName;
+    int m_animalAge;
 
-    bool animal_is_alive;
-    bool animal_removed;
+    bool m_animalIsAlived;
+    bool m_animalRemoved;
 
-    bool assigned;
+    bool m_assigned;
 
 public:
 
-    animal(int id,
-           bool is_veg,
-           int freq,
-           int food_kg,
-           std::string name,
-           int age);
+    animal(int m_id,
+           bool m_isVeg,
+           int m_freq,
+           int m_foodKg,
+           std::string m_name,
+           int m_age);
 
-    bool is_veg();
+    bool IsVeg();
 
-    int daily_food_requirement();
+    int DailyFoodRequirement();
 
-    void update_animal_info(
+    void UpdateAnimalInfo(
         bool is_living,
         bool to_remove,
         int age
     );
 
-    void display_animal_info();
+    void DisplayAnimalInfo();
 
-    int get_id();
+    int GetId();
 
-    std::string get_name();
+    std::string GetName();
 
-    void set_assigned(bool value);
+    int GetAge();
 
-    bool is_assigned() const;
+    int GetFrequency();
+
+    int GetMealSize();
+
+    void SetAssigned(bool value);
+
+    bool IsAssigned() const;
+
 };
 
 #endif

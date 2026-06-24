@@ -8,60 +8,58 @@ using namespace std;
 // Constructor 1
 enclosure::enclosure(int id)
 {
-    cell_id = id;
-    animal_ptr = nullptr;
+    m_cellId = id;
+    m_animalPtr = nullptr;
 }
 
-//Constructor 2
+// Constructor 2
 enclosure::enclosure(
     int id,
-    shared_ptr<animal> animal_pointer,
-    vector<OccupancyRecord> history_)
+    std::shared_ptr<animal> animal_pointer,
+    std::vector<OccupancyRecord> history_)
 {
-    cell_id = id;
-    animal_ptr = animal_pointer;
-    history = history_;
+    m_cellId = id;
+    m_animalPtr = animal_pointer;
+    m_history = history_;
 }
 
-
-
-bool enclosure::is_vaccant()
+bool enclosure::IsVaccant()
 {
-    return animal_ptr == nullptr;
+    return m_animalPtr == nullptr;
 }
 
-void enclosure::add_animal(shared_ptr<animal> ptr)
+void enclosure::AddAnimal(shared_ptr<animal> ptr)
 {
-    animal_ptr = ptr;
+    m_animalPtr = ptr;
 
     OccupancyRecord rec;
 
-    rec.cell_id = cell_id;
-    rec.animal_id = animal_ptr->get_id();
-    rec.animal_name = animal_ptr->get_name();
+    rec.m_CellId = m_cellId;
+    rec.m_animalId = m_animalPtr->GetId();
+    rec.m_animalName = m_animalPtr->GetName();
 
-    rec.entry_date = current_date();
+    rec.m_entryDate = CurrentDate();
 
-    history.push_back(rec);
+    m_history.push_back(rec);
 }
 
-void enclosure::remove_animal()
+void enclosure::RemoveAnimal()
 {
-    if (!history.empty())
+    if (!m_history.empty())
     {
-        history.back().exit_date = current_date();
+        m_history.back().m_exitDate = CurrentDate();
     }
 
-    animal_ptr = nullptr;
+    m_animalPtr = nullptr;
 }
 
-void enclosure::display_cell_info()
+void enclosure::DisplayCellInfo()
 {
-    cout << "Cell ID : " << cell_id << endl;
+    cout << "Cell ID : " << m_cellId << endl;
 
-    if (animal_ptr)
+    if (m_animalPtr)
     {
-        animal_ptr->display_animal_info();
+        m_animalPtr->DisplayAnimalInfo();
     }
     else
     {
@@ -69,37 +67,43 @@ void enclosure::display_cell_info()
     }
 }
 
-void enclosure::print_history()
+void enclosure::PrintHistory()
 {
     cout << "\nHistory of Cell "
-         << cell_id << endl;
+         << m_cellId << endl;
 
-    for (auto &r : history)
+    for (auto &r : m_history)
     {
-        cout << r.animal_name
+        cout << r.m_animalName
              << " ("
-             << r.animal_id
+             << r.m_animalId
              << ") ";
 
         cout << " From "
-             << r.entry_date
+             << r.m_entryDate
              << " To "
-             << r.exit_date
+             << r.m_exitDate
              << endl;
     }
 }
 
-int enclosure::get_cell_id()
+int enclosure::GetCellId()
 {
-    return cell_id;
+    return m_cellId;
 }
 
-shared_ptr<animal> enclosure::get_animal_ptr()
+shared_ptr<animal> enclosure::GetAnimalPtr()
 {
-    return animal_ptr;
+    return m_animalPtr;
 }
 
-const vector<OccupancyRecord>& enclosure::get_history() const
+const vector<OccupancyRecord>& enclosure::GetHistory() const
 {
-    return history;
+    return m_history;
+}
+
+void enclosure::AddHistoryRecord(
+    const OccupancyRecord& rec)
+{
+    m_history.push_back(rec);
 }

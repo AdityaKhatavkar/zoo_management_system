@@ -3,6 +3,6 @@
 
 #include <string>
 
-std::string current_date();
+std::string CurrentDate();
 
 #endif

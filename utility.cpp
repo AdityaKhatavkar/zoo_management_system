@@ -1,6 +1,6 @@
     #include "utility.h"
 
-std::string current_date()
+std::string CurrentDate()
 {
     return "2026-06-22";
 }

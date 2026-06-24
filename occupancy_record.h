@@ -7,13 +7,13 @@ class OccupancyRecord{
 
 public:
 
-    int cell_id;
-    int animal_id;
+    int m_CellId;
+    int m_animalId;
 
-    std::string animal_name;
+    std::string m_animalName;
 
-    std::string entry_date;
-    std::string exit_date;
+    std::string m_entryDate;
+    std::string m_exitDate;
 };
 
 #endif

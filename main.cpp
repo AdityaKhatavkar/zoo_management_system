@@ -4,17 +4,12 @@
 
 using namespace std;
 
-int main()
-{
+void UI(){
     zoo myZoo;
 
     int choice;
 
-    do{
-
-        // menu
-
-        
+    do{        
         cout << " ---- User Menu ---- " << endl;
         cout
             << "1. Add Animal\n"
@@ -27,12 +22,17 @@ int main()
             << "8. Save History\n"
             << "0. Exit\n";
 
-        cout << " Enter your choice : ";
-        cin >> choice;
-        while (choice < 0 || choice > 9)
+        while (true)
         {
-            cout << "\nEnter valid choice : ";
-            cin >> choice;
+            cout << "Enter your choice : ";
+
+            if (cin >> choice && choice >= 0 && choice <= 8)
+                break;
+
+            cout << "Invalid choice. Please enter a number between 0 and 8.\n";
+
+            cin.clear();
+            cin.ignore(10000, '\n');
         }
         cout << endl;
 
@@ -41,7 +41,8 @@ int main()
 
         case 1:
         {
-            int id, freq, meal, age;
+            int id, freq, age;
+            float meal;
             bool herb;
             string name;
 
@@ -49,7 +50,8 @@ int main()
             cin >> id;
 
             cout << "Animal Name : ";
-            cin >> name;
+            cin.ignore();
+            getline(cin, name);
 
             cout << "Age : ";
             cin >> age;
@@ -63,7 +65,7 @@ int main()
             cout << "Meal size (kg) : ";
             cin >> meal;
 
-            myZoo.add_animal_to_cell(
+            myZoo.AddAnimalToCell(
                 id,
                 herb,
                 freq,
@@ -81,7 +83,7 @@ int main()
             cout << "Cell ID : ";
             cin >> cell_id;
 
-            myZoo.add_enclosure(cell_id);
+            myZoo.AddEnclosure(cell_id);
 
             break;
         }
@@ -97,7 +99,7 @@ int main()
             cout << "Cell ID : ";
             cin >> cell_id;
 
-            myZoo.assign_animal_by_id(
+            myZoo.AssignAnimalById(
                 animal_id,
                 cell_id);
 
@@ -111,19 +113,19 @@ int main()
             cout << "Cell ID : ";
             cin >> cell_id;
 
-            myZoo.vacate_cell_by_id(cell_id);
+            myZoo.VacateCellById(cell_id);
 
             break;
         }
         case 5:
         {
-            myZoo.daily_food_report();
+            myZoo.DailyFoodReport();
             break;
         }
 
         case 6:
         {
-            myZoo.displayZoo();
+            myZoo.DisplayZoo();
             break;
         }
 
@@ -134,20 +136,22 @@ int main()
             cout << "Enclosure Index : ";
             cin >> enclosure_index;
 
-            myZoo.show_cell_history_by_id(
-                enclosure_index);
+            myZoo.ShowCellHistoryById(enclosure_index);
 
             break;
         }
 
         case 8:
         {
-            myZoo.save_history();
+            myZoo.SaveHistory();
+            cout << "History saved successfully.\n";
             break;
         }
 
         case 0:
-        {
+        {   myZoo.SaveHistory();
+            cout << "History saved.\n";
+
             cout << "Exiting...\n";
             break;
         }
@@ -160,5 +164,10 @@ int main()
 
     }while(choice != 0);
 
+}
+
+int main()
+{
+    UI();
     return 0;
 }

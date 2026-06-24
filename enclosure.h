@@ -6,44 +6,49 @@
 
 #include "animal.h"
 #include "occupancy_record.h"
-using namespace std;
 
 class enclosure{
 
 private:
 
-    int cell_id;
+    int m_cellId;
 
-    std::shared_ptr<animal> animal_ptr;
+    std::shared_ptr<animal> m_animalPtr;
 
-    std::vector<OccupancyRecord> history;
+    std::vector<OccupancyRecord> m_history;
 
 public:
 
     enclosure(int id);
 
     enclosure(int id,
-              shared_ptr<animal> animal_ptr,
-              vector<OccupancyRecord> history);
+              std::shared_ptr<animal> animal_ptr,
+              std::vector<OccupancyRecord> history);
 
-    bool is_vaccant();
+    bool IsVaccant();
 
-    void add_animal(
+    void AddAnimal(
         std::shared_ptr<animal> ptr
     );
 
-    void remove_animal();
+    void RemoveAnimal();
 
-    void display_cell_info();
+    void DisplayCellInfo();
 
-    void print_history();
+    void PrintHistory();
 
-    int get_cell_id();
+    int GetCellId();
 
-    std::shared_ptr<animal> get_animal_ptr();
+    std::shared_ptr<animal> GetAnimalPtr();
 
     const std::vector<OccupancyRecord>&
-    get_history() const;
+    GetHistory() const;
+
+    void AddHistoryRecord(
+    const OccupancyRecord& rec
+);
+
+    
 };
 
 #endif

@@ -3,40 +3,37 @@
 
 #include <vector>
 #include <memory>
+#include <sstream>
+#include <string>
 
 #include "animal.h"
 #include "enclosure.h"
-
-using namespace std;
 
 class zoo{
 
 private:
 
-    std::vector<
-        std::shared_ptr<animal>
-    > animals;
+    std::vector<std::shared_ptr<animal>> m_animals;
 
-    std::vector<enclosure>
-    enclosures;
+    std::vector<enclosure> m_enclosures;
 
 public:
 
     zoo();
 
-    zoo(vector<std::shared_ptr<animal>> animals,
+    zoo(std::vector<std::shared_ptr<animal>> animals,
         std::vector<enclosure> enclosures );
 
-    int find_animal_index(int animal_id);
+    int FindAnimalIndex(int m_animalId);
 
-    int find_enclosure_index(int cell_id);
+    int FindEnclosureIndex(int m_cellId);
 
-    void assign_animal_by_id(
-        int animal_id,
+    void AssignAnimalById(
+        int m_animalId,
         int cell_id
     );
 
-    void add_animal_to_cell(
+    void AddAnimalToCell(
         int id,
         bool is_veg,
         int freq,
@@ -45,28 +42,38 @@ public:
         int age
     );
 
-    void add_enclosure(int id);
+    void AddEnclosure(int id);
 
-    void assign_animal(
+    void AssignAnimal(
         int animal_index,
         int enclosure_index
     );
 
-    void  vacate_cell_by_id(int cell_id);
+    void  VacateCellById(int cell_id);
 
-    void vacate_cell(
+    void VacateCell(
         int enclosure_index
     );
 
-    void daily_food_report();
+    void DailyFoodReport();
 
-    void displayZoo();
+    void DisplayZoo();
 
-    void show_cell_history_by_id(
+    void ShowCellHistoryById(
         int enclosure_index
     );
 
-    void save_history();
+    void SaveHistory();
+
+    void SaveAnimals();
+
+    void SaveEnclosures();
+
+    void RestoreAnimals();
+
+    void RestoreEnclosures();
+
+    void RestoreHistory();
 };
 
 #endif
