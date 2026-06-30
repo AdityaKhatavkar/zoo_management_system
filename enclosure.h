@@ -1,54 +1,60 @@
-#ifndef ENCLOSURE_H
-#define ENCLOSURE_H
-
 #include <memory>
 #include <vector>
 
 #include "animal.h"
 #include "occupancy_record.h"
 
-class enclosure{
+class Enclosure{
 
 private:
+    
+    // Each cell has a unique ID number;
+    int m_uniqueCellId;
 
-    int m_cellId;
+    // Shared Pointer of type 'Animal'
+    std::shared_ptr<Animal> m_animalPtr;
 
-    std::shared_ptr<animal> m_animalPtr;
-
+    // Vector of datatype OccupancyRecord.
     std::vector<OccupancyRecord> m_history;
 
 public:
 
-    enclosure(int id);
-
-    enclosure(int id,
-              std::shared_ptr<animal> animal_ptr,
+    //constructor
+    Enclosure(int id,
+              std::shared_ptr<Animal> animal_ptr,
               std::vector<OccupancyRecord> history);
 
-    bool IsVaccant();
-
-    void AddAnimal(
-        std::shared_ptr<animal> ptr
+    //Adds Animal to the cell
+    void AddAnimalToCell(
+        std::shared_ptr<Animal> ptr
     );
 
-    void RemoveAnimal();
+    //Removes animla from cell
+    void RemoveAnimalFromCell();
 
+
+    //Keep track all the enimals that were entered in a jungle.
+    void AddHistoryRecord(const OccupancyRecord& rec);
+
+
+    //Display cell specific information
     void DisplayCellInfo();
 
-    void PrintHistory();
+    //Print record of animals that were once occupied perticual cell.
+    void PrintHistoryOfCell();
 
-    int GetCellId();
+    //Returs true if the cell is vaccant or return false.
+    bool IsCellVaccantOrNot()const;
 
-    std::shared_ptr<animal> GetAnimalPtr();
+    //Returns the unique ID number of a cell.
+    int GetCellId()const;
 
-    const std::vector<OccupancyRecord>&
-    GetHistory() const;
+    //Returs animla pointer
+    std::shared_ptr<Animal> GetAnimalPtr();
 
-    void AddHistoryRecord(
-    const OccupancyRecord& rec
-);
+    //Returns the reference to the vector of occupancy records
+    //Its a return type constant
+    const std::vector<OccupancyRecord>& GetHistory() const; //Its a function constant
 
-    
+    void Enclosure::AddHistoryRecord( const OccupancyRecord& rec) ; // Its a parameter constant
 };
-
-#endif

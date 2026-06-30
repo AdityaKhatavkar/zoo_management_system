@@ -1,60 +1,83 @@
-#ifndef ANIMAL_H
-#define ANIMAL_H
-
 #include <string>
 
-class animal{
+class Animal{
 
 private:
 
-    int m_animalID;
-    bool m_isHerbivorous;
-    int m_eatingFrequency;
-    float m_mealSizeKg;
+    // Is animal removed from the cell
+    bool m_isAnimalRemovedFromCell;
 
-    std::string m_animalName;
+    // Is cell assigned to the animla
+    bool m_isCellAssignedToAnimal;
+
+    // Does animal eat greenfood or not
+    bool m_isAnimalHerbivorous;
+
+    // Each animal have a unique ID number
+    int m_animalID;
+
+    // Each animal have a CellId in which he lives.
+    int m_assignedCellIdToAnimal;
+
+    // How many times perticular animal eats in a day
+    int m_eatingFrequencyOfAnimal;
+
+    // How old animal is? 
     int m_animalAge;
 
-    bool m_animalIsAlived;
-    bool m_animalRemoved;
+    // Name of animal (lion, elephant, wolf, fox)
+    std::string m_animalName;
 
-    bool m_assigned;
+    // How much kg food (greenstuff or meat) animal eat a single time.
+    float m_mealQuantityInKg;
+
+    
 
 public:
+    
+    //Constructor of class 'Animal'
+    Animal(bool isAnimalVeg,
+           int idOfAnimal,
+           int freqOfAnimalToEat,
+           int foodQuantityInKg,
+           int ageOfAnimal,
+           std::string nameOfAnimal);
 
-    animal(int m_id,
-           bool m_isVeg,
-           int m_freq,
-           int m_foodKg,
-           std::string m_name,
-           int m_age);
-
-    bool IsVeg();
-
-    int DailyFoodRequirement();
-
+    //Change the animal specific information ( age increases, )
     void UpdateAnimalInfo(
         bool is_living,
         bool to_remove,
         int age
     );
 
+    //Printing Animal Specific Information.
     void DisplayAnimalInfo();
 
-    int GetId();
+    //Assignes true if animal is assigned with a cell else assignes flase.
+    void AssignedCellToAnimal(bool value);
 
-    std::string GetName();
+    //Returns 'True' if animal is vegeterian else return false
+    bool IsAnimalHerbivorousOrNot()const;
 
-    int GetAge();
+    //Returns true if animal have any cell
+    bool IsCellAssignedToAnimal() const;
 
-    int GetFrequency();
+    //Returns the unique Id number of animal
+    int GetAnimalId()const; 
 
-    int GetMealSize();
+    //Returns the age of animal
+    int GetAnimalAge()const;
 
-    void SetAssigned(bool value);
+    //Returns number of times animal eat in a single day.
+    int GetFoodEatingFrequencyOfAnimal()const;
 
-    bool IsAssigned() const;
+    //Returns quantity of food animal eats single time.
+    int GetQuantityOfFoodAnimalNeedPerDay()const;
+
+    //Returns the name of animal 
+    std::string GetAnimalName()const;    
+
+    //Returns the Amount of Food Animal need to eat in a single day.
+    float AmountOfFoodAnimalNeedPerDay()const;
 
 };
-
-#endif

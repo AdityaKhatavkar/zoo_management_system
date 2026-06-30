@@ -1,4 +1,3 @@
-#ifndef ZOO_H
 #define ZOO_H
 
 #include <vector>
@@ -9,59 +8,29 @@
 #include "animal.h"
 #include "enclosure.h"
 
-class zoo{
+class Zoo{
+    
+    private:
+    std::vector<std::shared_ptr<Animal>> m_animals;
+    std::vector<Enclosure> m_enclosures;
+    
+    public:
 
-private:
+    Zoo(std::vector<std::shared_ptr<Animal>>& animals,
+        std::vector<Enclosure>& enclosures );
 
-    std::vector<std::shared_ptr<animal>> m_animals;
+    void AddEnclosure(int ID);
+    
 
-    std::vector<enclosure> m_enclosures;
+    void AssignCellToAnimalById(int& const UniqueAnimalID, int& const UniqueCellID );
 
-public:
+    void  VacateCellById(int& const CellID);
 
-    zoo();
+    void PrintDailyReportOfTotalFoodRequirement();
 
-    zoo(std::vector<std::shared_ptr<animal>> animals,
-        std::vector<enclosure> enclosures );
+    void PrintEveryAnimalInZoo();
 
-    int FindAnimalIndex(int m_animalId);
-
-    int FindEnclosureIndex(int m_cellId);
-
-    void AssignAnimalById(
-        int m_animalId,
-        int cell_id
-    );
-
-    void AddAnimalToCell(
-        int id,
-        bool is_veg,
-        int freq,
-        int food_kg,
-        std::string name,
-        int age
-    );
-
-    void AddEnclosure(int id);
-
-    void AssignAnimal(
-        int animal_index,
-        int enclosure_index
-    );
-
-    void  VacateCellById(int cell_id);
-
-    void VacateCell(
-        int enclosure_index
-    );
-
-    void DailyFoodReport();
-
-    void DisplayZoo();
-
-    void ShowCellHistoryById(
-        int enclosure_index
-    );
+    void ShowCellHistoryById( int& const EnclosureID);
 
     void SaveHistory();
 
@@ -74,6 +43,9 @@ public:
     void RestoreEnclosures();
 
     void RestoreHistory();
+
+    int FindIndexOfAnimal(int& const UniqueAnimalID);
+
+    int FindIndexOfEnclosure(int& const UniqueCellID);
 };
 
-#endif

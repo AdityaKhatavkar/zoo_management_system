@@ -1,96 +1,66 @@
 #include "animal.h"
-
 #include <iostream>
 
-using namespace std;
+Animal::Animal(
+           bool isAnimalVeg,
+           int idOfAnimal,
+           int freqOfAnimalToEat,
+           int foodQuantityInKg,
+           int ageOfAnimal,
+           std::string nameOfAnimal){
 
-animal::animal(
-    int id,
-    bool is_veg,
-    int freq,
-    int food_kg,
-    string name,
-    int age
-)
-{
-    m_animalID = id;
-    m_animalName = name;
-    m_animalAge = age;
+            m_isAnimalRemovedFromCell = false;
+            m_isCellAssignedToAnimal = false;
+            m_isAnimalHerbivorous = isAnimalVeg;
+            m_animalID = idOfAnimal;
+            m_assignedCellIdToAnimal = -1;
+            m_animalAge = ageOfAnimal;
+            m_animalName = nameOfAnimal;
+    }
 
-    m_isHerbivorous = is_veg;
-    m_eatingFrequency = freq;
-    m_mealSizeKg = food_kg;
+    //Printing Animal Specific Information.
+    void Animal :: DisplayAnimalInfo(){
+        std :: cout << "Name of Animal : " << m_animalName << "\n";
+        std :: cout << "Age of Animal  : " << m_animalAge << "\n";
+        std :: cout << "Id of Animal   : " << m_animalID << "\n";
+    }
 
-    m_animalIsAlived = true;
-    m_animalRemoved = false;
+    //Assignes true if animal is assigned with a cell else assignes flase.
+    void Animal :: AssignedCellToAnimal(bool value){
+        m_isCellAssignedToAnimal = value;
+    }
 
-    m_assigned = false;
-}
+    //Returns 'True' if animal is vegeterian else return false
+    bool Animal :: IsAnimalHerbivorousOrNot()const{
+            return  m_isAnimalHerbivorous;
+    }
 
-bool animal::IsVeg()
-{
-    return m_isHerbivorous;
-}
+    //Returns true if animal have any cell
+    bool Animal :: IsCellAssignedToAnimal()const{
+            return m_isCellAssignedToAnimal;
+    }
 
-int animal::DailyFoodRequirement()
-{
-    return m_eatingFrequency * m_mealSizeKg;
-}
+    int Animal :: GetAnimalId()const{
+            return m_animalID;
+    } 
 
-void animal::UpdateAnimalInfo(
-    bool is_living,
-    bool to_remove,
-    int age
-)
-{
-    m_animalIsAlived = is_living;
-    m_animalRemoved = to_remove;
-    m_animalAge = age;
-}
+    int Animal :: GetAnimalAge()const{
+            return m_animalAge;
+    }
 
-void animal::DisplayAnimalInfo()
-{
-    cout << "Animal ID : "
-         << m_animalID << endl;
+    int Animal :: GetFoodEatingFrequencyOfAnimal()const{
+            return m_eatingFrequencyOfAnimal;
+    }
 
-    cout << "Animal Name : "
-         << m_animalName << endl;
+    // int Animal ::  GetQuantityOfFoodAnimalNeedPerDay()const{
+    //         return m_
+    // }
 
-    cout << "Animal Age : "
-         << m_animalAge << endl;
-}
+    //Returns the name of animal 
+    std::string Animal :: GetAnimalName()const{
+            return m_animalName;
+    }
 
-int animal::GetId()
-{
-    return m_animalID;   // FIX: was returning m_animalAge
-}
-
-string animal::GetName()
-{
-    return m_animalName;
-}
-
-int animal::GetAge()
-{
-    return m_animalAge;
-}
-
-int animal::GetFrequency()
-{
-    return m_eatingFrequency;
-}
-
-int animal::GetMealSize()
-{
-    return m_mealSizeKg;
-}
-
-void animal::SetAssigned(bool value)
-{
-    m_assigned = value;
-}
-
-bool animal::IsAssigned() const
-{
-    return m_assigned;
-}
+    float Animal :: AmountOfFoodAnimalNeedPerDay()const{
+        return m_eatingFrequencyOfAnimal * m_mealQuantityInKg ; 
+    };
