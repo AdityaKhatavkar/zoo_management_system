@@ -2,16 +2,16 @@
 
 #include "zoo.h"
 
-using namespace std;
-
-void UI(){
-    zoo myZoo;
+void UI()
+{
+    Zoo zoo_object; // default constructor: loads saved state from disk if present
 
     int choice;
 
-    do{        
-        cout << " ---- User Menu ---- " << endl;
-        cout
+    do
+    {
+        std :: cout << " ---- User Menu ---- " << "\n";
+        std :: cout
             << "1. Add Animal\n"
             << "2. Add Enclosure\n"
             << "3. Assign Animal To Cell\n"
@@ -24,48 +24,47 @@ void UI(){
 
         while (true)
         {
-            cout << "Enter your choice : ";
+            std :: cout << "Enter your choice : ";
 
-            if (cin >> choice && choice >= 0 && choice <= 8)
+            if (std :: cin >> choice && choice >= 0 && choice <= 8)
                 break;
 
-            cout << "Invalid choice. Please enter a number between 0 and 8.\n";
+            std :: cout << "Invalid choice. Please enter a number between 0 and 8.\n";
 
-            cin.clear();
-            cin.ignore(10000, '\n');
+            std :: cin.clear();
+            std :: cin.ignore(10000, '\n');
         }
-        cout << endl;
+        std :: cout << "\n";
 
         switch (choice)
         {
-
         case 1:
         {
             int id, freq, age;
             float meal;
             bool herb;
-            string name;
+            std :: string name;
 
-            cout << "Animal ID : ";
-            cin >> id;
+            std :: cout << "Animal ID : ";
+            std :: cin >> id;
 
-            cout << "Animal Name : ";
-            cin.ignore();
-            getline(cin, name);
+            std :: cout << "Animal Name : ";
+            std :: cin.ignore();
+            std :: getline(std :: cin, name);
 
-            cout << "Age : ";
-            cin >> age;
+            std :: cout << "Age : ";
+            std :: cin >> age;
 
-            cout << "Herbivorous? (1/0) : ";
-            cin >> herb;
+            std :: cout << "Herbivorous? (1/0) : ";
+            std :: cin >> herb;
 
-            cout << "Meals per day : ";
-            cin >> freq;
+            std :: cout << "Meals per day : ";
+            std :: cin >> freq;
 
-            cout << "Meal size (kg) : ";
-            cin >> meal;
+            std :: cout << "Meal size (kg) : ";
+            std :: cin >> meal;
 
-            myZoo.AddAnimalToCell(
+            zoo_object.AddAnimalToCell(
                 id,
                 herb,
                 freq,
@@ -80,10 +79,10 @@ void UI(){
         {
             int cell_id;
 
-            cout << "Cell ID : ";
-            cin >> cell_id;
+            std :: cout << "Cell ID : ";
+            std :: cin >> cell_id;
 
-            myZoo.AddEnclosure(cell_id);
+            zoo_object.AddEnclosure(cell_id);
 
             break;
         }
@@ -93,13 +92,13 @@ void UI(){
             int animal_id;
             int cell_id;
 
-            cout << "Animal ID : ";
-            cin >> animal_id;
+            std :: cout << "Animal ID : ";
+            std :: cin >> animal_id;
 
-            cout << "Cell ID : ";
-            cin >> cell_id;
+            std :: cout << "Cell ID : ";
+            std :: cin >> cell_id;
 
-            myZoo.AssignAnimalById(
+            zoo_object.AssignAnimalById(
                 animal_id,
                 cell_id);
 
@@ -110,49 +109,50 @@ void UI(){
         {
             int cell_id;
 
-            cout << "Cell ID : ";
-            cin >> cell_id;
+            std :: cout << "Cell ID : ";
+            std :: cin >> cell_id;
 
-            myZoo.VacateCellById(cell_id);
+            zoo_object.VacateCellById(cell_id);
 
             break;
         }
+
         case 5:
         {
-            myZoo.DailyFoodReport();
+            zoo_object.DailyFoodReport();
             break;
         }
 
         case 6:
         {
-            myZoo.DisplayZoo();
+            zoo_object.DisplayZoo();
             break;
         }
 
         case 7:
         {
-            int enclosure_index;
+            int cell_id;
 
-            cout << "Enclosure Index : ";
-            cin >> enclosure_index;
+            std :: cout << "Cell ID : ";
+            std :: cin >> cell_id;
 
-            myZoo.ShowCellHistoryById(enclosure_index);
+            zoo_object.ShowCellHistoryById(cell_id);
 
             break;
         }
 
         case 8:
         {
-            myZoo.SaveHistory();
-            cout << "History saved successfully.\n";
+            zoo_object.SaveHistory();
             break;
         }
 
         case 0:
-        {   myZoo.SaveHistory();
-            cout << "History saved.\n";
-
-            cout << "Exiting...\n";
+        {
+            zoo_object.SaveAnimals();
+            zoo_object.SaveEnclosures();
+            zoo_object.SaveHistory();
+            cout << "State saved. Exiting...\n";
             break;
         }
 
@@ -162,8 +162,9 @@ void UI(){
         }
         }
 
-    }while(choice != 0);
+        cout << "\n";
 
+    } while (choice != 0);
 }
 
 int main()

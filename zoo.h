@@ -8,44 +8,52 @@
 #include "animal.h"
 #include "enclosure.h"
 
-class Zoo{
-    
-    private:
+class Zoo
+{
+private:
     std::vector<std::shared_ptr<Animal>> m_animals;
     std::vector<Enclosure> m_enclosures;
-    
-    public:
 
+public:
+    // Default constructor: starts empty and loads any saved state from disk
+    // (animals.csv / enclosures.csv / cell_history.csv), if present.
+    Zoo();
+
+    // Also allow constructing from existing in-memory data.
     Zoo(std::vector<std::shared_ptr<Animal>>& animals,
-        std::vector<Enclosure>& enclosures );
+        std::vector<Enclosure>& enclosures);
 
-    void AddEnclosure(int ID);
-    
+    // Creates a new animal and adds it (unassigned) to the zoo.
+    void AddAnimalToCell(int id,
+                          bool isHerbivore,
+                          int mealsPerDay,
+                          float mealSizeKg,
+                          const std::string& name,
+                          int age);
 
-    void AssignCellToAnimalById(int& const UniqueAnimalID, int& const UniqueCellID );
+    // Creates a new, empty enclosure with the given cell ID.
+    void AddEnclosure(int cellId);
 
-    void  VacateCellById(int& const CellID);
+    // Assigns an existing animal (by ID) to an existing, vacant cell (by ID).
+    void AssignAnimalById(int animalId, int cellId);
 
-    void PrintDailyReportOfTotalFoodRequirement();
+    // Vacates whichever animal currently occupies the given cell.
+    void VacateCellById(int cellId);
 
-    void PrintEveryAnimalInZoo();
+    // Prints total daily green-food / meat-food requirements across the zoo.
+    void DailyFoodReport();
 
-    void ShowCellHistoryById( int& const EnclosureID);
+    // Prints info for every animal in the zoo.
+    void DisplayZoo();
+
+    // Prints the occupancy history for the cell with the given ID.
+    void ShowCellHistoryById(int cellId);
 
     void SaveHistory();
-
     void SaveAnimals();
-
     void SaveEnclosures();
 
     void RestoreAnimals();
-
     void RestoreEnclosures();
-
     void RestoreHistory();
-
-    int FindIndexOfAnimal(int& const UniqueAnimalID);
-
-    int FindIndexOfEnclosure(int& const UniqueCellID);
 };
-
